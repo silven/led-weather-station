@@ -1,0 +1,29 @@
+[package]
+name = "leddy"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+# input
+sensor-scd30 = { version = "0.4", features = [], default-features = false  }
+linux-embedded-hal = "0.2"
+chrono = "0.4"
+rppal = "0.13"
+
+# images / backgrounds
+minreq = { version = "2.6", features = ["https-rustls-probe"] }
+image = { version = "0.24", features = ["jpeg", "png", "bmp"], default-features = false }
+tinybmp = "0.3"
+
+# wavescreen
+rand = "0.8"
+rulinalg = "0.4"
+
+# management
+signal-hook = "0.3"
+
+# output
+rpi-led-matrix = "0.4"
+embedded-graphics = "0.7.1"
