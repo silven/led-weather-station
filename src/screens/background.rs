@@ -24,7 +24,7 @@ use tinybmp::DynamicBmp;
 
 use std::sync::atomic::AtomicBool;
 
-static DEFAULT_BACKGROUND: &[u8] = include_bytes!("../sakura-bg.bmp");
+static DEFAULT_BACKGROUND: &[u8] = include_bytes!("../../sakura-bg.bmp");
 
 use crate::mailbox::Mailbox;
 

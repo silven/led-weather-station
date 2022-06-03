@@ -18,8 +18,11 @@ image = { version = "0.24", features = ["jpeg", "png", "bmp"], default-features 
 tinybmp = "0.3"
 
 # wavescreen
-rand = "0.8"
+rand = "0.7"
 rulinalg = "0.4"
+
+# maze screen
+maze_generator = "2.0"
 
 # management
 signal-hook = "0.3"

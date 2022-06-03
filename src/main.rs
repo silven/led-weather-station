@@ -12,24 +12,21 @@ use std::sync::Arc;
 use std::thread;
 use std::time::Duration;
 
-pub trait Screen {
-    fn left(&mut self);
-    fn right(&mut self);
-    fn click(&mut self);
-    fn draw(&mut self, canvas: &mut LedCanvas);
-}
+mod screens;
+use screens::Screen;
+use screens::BackgroundScreen;
+use screens::WaveScreen;
+use screens::MazeScreen;
 
-mod background;
 mod mailbox;
 mod rotary;
-mod waves;
 use rotary::InputEvent;
 
 fn main() {
     let term = setup_signal_trapping();
     let irx = start_input_thread(&term);
 
-    let mut background = background::BackgroundScreen::new(Arc::clone(&term));
+    let mut background = BackgroundScreen::new(Arc::clone(&term));
 
     let matrix = setup_matrix();
 
@@ -37,7 +34,8 @@ fn main() {
     canvas.clear();
     canvas = matrix.swap(canvas);
 
-    let mut wave = waves::WaveScreen::new(&canvas);
+    let mut wave = WaveScreen::new(&canvas);
+    let mut maze = MazeScreen::new(&canvas);
 
     let border_style = PrimitiveStyleBuilder::new()
         .stroke_color(Rgb888::WHITE)
@@ -53,6 +51,7 @@ fn main() {
     let screens = [
         &mut background as &mut dyn Screen,
         &mut wave as &mut dyn Screen,
+        &mut maze as &mut dyn Screen,
     ];
 
     while !term.load(Ordering::Relaxed) {
